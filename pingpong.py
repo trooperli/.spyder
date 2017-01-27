@@ -9,8 +9,8 @@ class pingPong:
     def calculate(self):
         if len(self.rankingScores) == 2:
             rs = self.single_play(self.rankingScores,self.result)
-#        elif len(self.rankingScores) == 4:
-#            rs = self.double_play(self.rankingScores,self.result)
+        elif len(self.rankingScores) == 4:
+            rs = self.double_play(self,self.rankingScores,self.result)
         else:
             raise Exception('Invalid number of players!')
         
@@ -200,6 +200,19 @@ class pingPong:
                 raise Exception('Game is a game, no even game is allowed!')
         
          
+        return rs
+        
+    @staticmethod    
+    def double_play(self,rs,r):
+        rs1 = (rs[0]+rs[1])/2.0
+        rs2 = (rs[2]+rs[3])/2.0
+        rs_new = self.single_play([rs1, rs2],r)
+        new_sum1 = rs_new[0]
+        new_sum2 = rs_new[1]
+        rs[0] = rs[0]+(new_sum1-rs1)
+        rs[1] = rs[1]+(new_sum1-rs1)
+        rs[2] = rs[2]+(new_sum2-rs2)
+        rs[3] = rs[3]+(new_sum2-rs2)
         return rs
         
         
